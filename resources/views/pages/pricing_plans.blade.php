@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    @include('menu')
+    @include('partials.menu')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h5>Pricing</h5></div>
+                <div class="card-header"><h5>@lang('pricing_plans.title')</h5></div>
 
                 <div class="card-body">
 

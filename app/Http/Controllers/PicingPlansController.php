@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PricingController extends Controller
+class PricingPlansController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +23,6 @@ class PricingController extends Controller
      */
     public function index()
     {
-        return view('pages.pricing');
+        return view('pages.pricing_plans');
     }
 }

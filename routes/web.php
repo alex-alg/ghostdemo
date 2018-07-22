@@ -31,7 +31,7 @@ Route::get(
     '/pricing',
     [
         'as' => 'pricing',
-        'uses' => 'PricingController@index',
+        'uses' => 'PricingPlansController@index',
     ]
 );
 
@@ -41,6 +41,13 @@ Route::get(
 	    [
 	        'as' => 'admin.index',
 	        'uses' => 'AdminController@index',
+	    ]
+	);
+	Route::get(
+	    '/os',
+	    [
+	        'as' => 'admin.os.index',
+	        'uses' => 'OsController@index',
 	    ]
 	);
  });

@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    @include('partials.menu')
+	@include('partials.admin.menu')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">@lang('home.title')</div>
+                <div class="card-header"><h5>Os</h5></div>
 
                 <div class="card-body">
                     
