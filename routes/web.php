@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    [
+        'as' => 'home',
+        'uses' => 'HomeController@index',
+    ]
+);
+
+Route::get(
+    '/pricing',
+    [
+        'as' => 'pricing',
+        'uses' => 'PricingController@index',
+    ]
+);
+
+Auth::routes();
+
