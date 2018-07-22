@@ -14,6 +14,14 @@
 Route::get(
     '/',
     [
+        'as' => 'index',
+        'uses' => 'HomeController@index',
+    ]
+);
+
+Route::get(
+    '/home',
+    [
         'as' => 'home',
         'uses' => 'HomeController@index',
     ]
@@ -26,6 +34,17 @@ Route::get(
         'uses' => 'PricingController@index',
     ]
 );
+
+ Route::group(['prefix' => 'admin'], function () {
+ 	Route::get(
+	    '/',
+	    [
+	        'as' => 'admin.index',
+	        'uses' => 'AdminController@index',
+	    ]
+	);
+ });
+
 
 Auth::routes();
 
