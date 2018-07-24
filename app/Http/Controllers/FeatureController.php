@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OsController extends Controller
+class FeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class OsController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.os.index');
+        //
     }
 
     /**
