@@ -1,4 +1,4 @@
-Lavavel 5.6
+Laravel 5.6
 
 Run 
 php artisan migrate
