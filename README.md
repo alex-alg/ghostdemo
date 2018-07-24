@@ -1,3 +1,5 @@
+Lavavel 5.6
+
 Run 
 php artisan migrate
 php artisan db:seed
