@@ -46,6 +46,12 @@ class Plan
 			$plan = PlanModel::findOrFail($id);
 			$plan->fill($data);
 			$plan->save();
+
+
+			if(!empty($data['feature_ids'])){
+				$plan->features()->sync($data['feature_ids']);
+			}
+
 			\DB::commit();
 		} catch(\Exception $e) {
 			\DB::rollBack();

@@ -80,8 +80,6 @@ class PlanController extends Controller
         $data['operating_systems'] = $osRepo->getAll();
         $data['features'] = $featureRepo->getAll();
 
-        
-
         return view('pages.admin.plan.edit', $data);
     }
 
@@ -92,9 +90,13 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePlanRequest $request, int $id, PlanRepo $planRepo)
     {
-        //
+        $data = $request->input('plan');
+        $planRepo->update($data, $id);
+
+        return redirect()->route('admin.plan.index')
+                        ->with('status', 'Plan updated succesfully');
     }
 
     /**
@@ -103,8 +105,11 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id, PlanRepo $planRepo)
     {
-        //
+         $planRepo->destroy($id);
+
+        return redirect()->route('admin.plan.index')
+                        ->with('status', 'Plan deleted succesfully');
     }
 }

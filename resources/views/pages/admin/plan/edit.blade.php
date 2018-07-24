@@ -9,7 +9,7 @@
                 <div class="card-header"><h5>@lang('plan.create_title')</h5></div>
 
                 <div class="card-body">
-                    <form class="" method="post" action="{{ route('admin.plan.store') }}">
+                    <form class="" method="post" action="{{ route('admin.plan.update', $plan->id) }}">
                         @foreach ($errors->all() as $error)
                             <p class="alert alert-danger">{{ $error }}</p>
                         @endforeach
