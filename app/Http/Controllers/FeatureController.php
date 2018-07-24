@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests\Feature\StoreFeature as StoreFeatureRequest;
+use App\Http\Requests\Feature\UpdateFeature as UpdateFeatureRequest;
+
+use App\Repositories\Feature as FeatureRepo;
+
 class FeatureController extends Controller
 {
     /**
@@ -11,9 +16,12 @@ class FeatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, FeatureRepo $featureRepo)
     {
-        //
+        $data = [];
+        $data['features'] = $featureRepo->getAll();
+
+        return view('pages.admin.feature.index', $data);
     }
 
     /**
@@ -21,9 +29,9 @@ class FeatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('pages.admin.feature.create');
     }
 
     /**
@@ -32,9 +40,14 @@ class FeatureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFeatureRequest $request, FeatureRepo $featureRepo)
     {
-        //
+        $data = $request->input('feature');
+
+        $featureRepo->store($data);
+
+        return redirect()->route('admin.feature.index')
+                        ->with('status', 'Feature added succesfully');
     }
 
     /**
@@ -54,9 +67,12 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id, FeatureRepo $featureRepo)
     {
-        //
+        $data = [];
+        $data['feature'] = $featureRepo->getById($id);
+
+        return view('pages.admin.feature.edit', $data);
     }
 
     /**
@@ -66,9 +82,13 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFeatureRequest $request, int $id, FeatureRepo $featureRepo)
     {
-        //
+        $data = $request->input('feature');
+        $featureRepo->update($data, $id);
+
+        return redirect()->route('admin.feature.index')
+                        ->with('status', 'Feature updated succesfully');
     }
 
     /**
@@ -77,8 +97,11 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id, FeatureRepo $featureRepo)
     {
-        //
+        $featureRepo->destroy($id);
+
+        return redirect()->route('admin.feature.index')
+                        ->with('status', 'Feature deleted succesfully');
     }
 }

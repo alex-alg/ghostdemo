@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\OperatingSystem\StoreOperatingSystem as StoreOperatingSystemRequest;
 use App\Http\Requests\OperatingSystem\UpdateOperatingSystem as UpdateOperatingSystemRequest;
+
 use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
 class OperatigSystemController extends Controller
