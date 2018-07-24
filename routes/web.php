@@ -96,38 +96,126 @@ Route::get(
         ]
     );
     Route::get(
-        '/os/create',
+        '/feature/create',
         [
             'as' => 'admin.feature.create',
             'uses' => 'FeatureController@create',
         ]
     );
     Route::post(
-        '/os/store',
+        '/feature/store',
         [
             'as'    => 'admin.feature.store',
             'uses'  => 'FeatureController@store',
         ]
     );
     Route::get(
-        '/os/edit/{id}',
+        '/feature/edit/{id}',
         [
             'as'    => 'admin.feature.edit',
             'uses'  => 'FeatureController@edit',
         ]
     );
     Route::post(
-        '/os/update/{id}',
+        '/feature/update/{id}',
         [
             'as'    => 'admin.feature.update',
             'uses'  => 'FeatureController@update',
         ]
     );
     Route::get(
-        '/os/destroy/{id}',
+        '/feature/destroy/{id}',
         [
             'as'    => 'admin.feature.destroy',
             'uses'  => 'FeatureController@destroy',
+        ]
+    );
+
+    //Voucher Routes
+    Route::get(
+        '/voucher',
+        [
+            'as' => 'admin.voucher.index',
+            'uses' => 'VoucherController@index',
+        ]
+    );
+    Route::get(
+        '/voucher/create',
+        [
+            'as' => 'admin.voucher.create',
+            'uses' => 'VoucherController@create',
+        ]
+    );
+    Route::post(
+        '/voucher/store',
+        [
+            'as'    => 'admin.voucher.store',
+            'uses'  => 'VoucherController@store',
+        ]
+    );
+    Route::get(
+        '/voucher/edit/{id}',
+        [
+            'as'    => 'admin.voucher.edit',
+            'uses'  => 'VoucherController@edit',
+        ]
+    );
+    Route::post(
+        '/voucher/update/{id}',
+        [
+            'as'    => 'admin.voucher.update',
+            'uses'  => 'VoucherController@update',
+        ]
+    );
+    Route::get(
+        '/voucher/destroy/{id}',
+        [
+            'as'    => 'admin.voucher.destroy',
+            'uses'  => 'VoucherController@destroy',
+        ]
+    );
+
+    //Plans Routes
+    Route::get(
+        '/plan',
+        [
+            'as' => 'admin.plan.index',
+            'uses' => 'PlanController@index',
+        ]
+    );
+    Route::get(
+        '/plan/create',
+        [
+            'as' => 'admin.plan.create',
+            'uses' => 'PlanController@create',
+        ]
+    );
+    Route::post(
+        '/plan/store',
+        [
+            'as'    => 'admin.plan.store',
+            'uses'  => 'PlanController@store',
+        ]
+    );
+    Route::get(
+        '/plan/edit/{id}',
+        [
+            'as'    => 'admin.plan.edit',
+            'uses'  => 'PlanController@edit',
+        ]
+    );
+    Route::post(
+        '/plan/update/{id}',
+        [
+            'as'    => 'admin.plan.update',
+            'uses'  => 'PlanController@update',
+        ]
+    );
+    Route::get(
+        '/plan/destroy/{id}',
+        [
+            'as'    => 'admin.plan.destroy',
+            'uses'  => 'PlanController@destroy',
         ]
     );
  });
