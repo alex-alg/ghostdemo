@@ -18,7 +18,7 @@ class Plan
 		return PlanModel::findOrFail($id);
 	}
 
-	public function store(array $data): PlanModel
+	public function store(array $data, array $featureIds): PlanModel
 	{
 		\DB::beginTransaction();
 		try {
@@ -26,8 +26,8 @@ class Plan
 			$plan->fill($data);
 			$plan->save();
 
-			if(!empty($data['feature_ids'])){
-				$plan->features()->sync($data['feature_ids']);
+			if(!empty($featureIds)){
+				$plan->features()->sync($featureIds);
 			}
 
 			\DB::commit();
@@ -64,5 +64,25 @@ class Plan
 	public function destroy(int $id)
 	{
 		return PlanModel::findOrFail($id)->delete();
+	}
+
+	public function parseForList(Collection $plans): Collection
+	{
+		return $plans->map(function ($item, $key) {
+			$plan = app(\stdClass::class);
+			$plan->id = $item->id;
+			$plan->name = $item->name;
+			$plan->os = $item->operating_system->name;
+			$plan->features = $item->features;
+
+			return $plan;
+		});
+	}
+
+	public function filterByOs(Collection $plans, int $osId): Collection
+	{
+		return $plans->filter(function($item, $key) use ($osId){
+			return $item->operating_system_id === $osId;
+		});
 	}
 }

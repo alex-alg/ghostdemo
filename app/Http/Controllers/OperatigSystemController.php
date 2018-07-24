@@ -9,6 +9,8 @@ use App\Http\Requests\OperatingSystem\UpdateOperatingSystem as UpdateOperatingSy
 
 use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
+use App\Models\OperatingSystem as OperatingSystemModel;
+
 class OperatigSystemController extends Controller
 {
     /**

@@ -28,10 +28,10 @@ Route::get(
 );
 
 Route::get(
-    '/pricing',
+    '/plan-list',
     [
-        'as' => 'pricing',
-        'uses' => 'PricingPlansController@index',
+        'as' => 'plan-list',
+        'uses' => 'PlanController@planList',
     ]
 );
 

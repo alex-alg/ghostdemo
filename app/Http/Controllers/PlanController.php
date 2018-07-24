@@ -11,6 +11,8 @@ use App\Repositories\Plan as PlanRepo;
 use App\Repositories\Feature as FeatureRepo;
 use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
+use App\Helpers\Detection;
+
 class PlanController extends Controller
 {
     /**
@@ -21,7 +23,8 @@ class PlanController extends Controller
     public function index(Request $request, PlanRepo $planRepo)
     {
         $data = [];
-        $data['plans'] = $planRepo->getAll();
+        $plans = $planRepo->getAll();
+        $data['plans'] = $planRepo->parseForList($plans);
 
         return view('pages.admin.plan.index', $data);
     }
@@ -49,8 +52,9 @@ class PlanController extends Controller
     public function store(StorePlanRequest $request, PlanRepo $planRepo)
     {
         $data = $request->input('plan');
+        $featureIds = $request->input('feature_ids');
 
-        $planRepo->store($data);
+        $planRepo->store($data, $featureIds);
 
         return redirect()->route('admin.plan.index')
                         ->with('status', 'Plan added succesfully');
@@ -111,5 +115,20 @@ class PlanController extends Controller
 
         return redirect()->route('admin.plan.index')
                         ->with('status', 'Plan deleted succesfully');
+    }
+
+    public function planList(Request $request, PlanRepo $planRepo, Detection $detectionHelper, OperatingSystemRepo $osRepo)
+    {
+        $data = [];
+        $plans = $planRepo->getAll();
+        
+        $osFullName = $detectionHelper->getOS($_SERVER['HTTP_USER_AGENT']);
+        $osName = explode(' ', $osFullName)[0];
+        $os = $osRepo->getByName($osName);
+
+        $plans = $planRepo->filterByOs($plans, $os->id);
+        $data['plans'] = $planRepo->parseForList($plans);
+
+        return view('pages.pricing_plans', $data);
     }
 }

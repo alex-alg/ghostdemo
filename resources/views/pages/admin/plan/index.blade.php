@@ -32,8 +32,12 @@
                         <tr>
                             <td>{{ $plan->id }}</td>
                             <td>{{ $plan->name }}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $plan->os }}</td>
+                            <td>
+                                @foreach($plan->features as $feature)
+                                    <p>{{ $feature->name }}</p>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ route('admin.plan.edit', $plan->id) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ route('admin.plan.destroy', $plan->id) }}" class="btn btn-danger">Delete</a>

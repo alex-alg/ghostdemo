@@ -54,4 +54,9 @@ class OperatingSystem
 	{
 		return OperatingSystemModel::findOrFail($id)->delete();
 	}
+
+	public function getByName(string $name)
+    {
+        return OperatingSystemModel::where('name', $name)->get()->first();
+    }
 }

@@ -4,25 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Helpers\Detection;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Detection $detectionHelper)
     {
-        return view('pages.home');
+        $data = [
+            'os'           => $detectionHelper->getOS($_SERVER['HTTP_USER_AGENT']),
+            'browser'      => $_SERVER['HTTP_USER_AGENT'],
+            'ip'           => $_SERVER['REMOTE_ADDR'],
+            'mobile_device'=> $detectionHelper->isMobileDevice($_SERVER['HTTP_USER_AGENT']) ? 'Yes' :'No'
+        ];
+
+        return view('pages.home', $data);
     }
 }

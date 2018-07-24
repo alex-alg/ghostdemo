@@ -53,7 +53,7 @@
                             <div class="col-lg-10">
                                 @foreach($features as $feature)
                                 <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="plan[feature_ids][]" value="{{ $feature->id }}">
+                                  <input class="form-check-input" type="checkbox" name="feature_ids[]" value="{{ $feature->id }}">
                                   <label class="form-check-label">
                                     {{ $feature->name }}
                                   </label>
