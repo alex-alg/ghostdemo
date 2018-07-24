@@ -31,4 +31,12 @@ class Feature extends Model
      * @var array
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * Relationships
+     */
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
+    }
 }

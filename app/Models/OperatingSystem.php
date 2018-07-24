@@ -32,8 +32,11 @@ class OperatingSystem extends Model
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    // public function features()
-    // {
-    //     return $this->hasMany(Features::class, 'operating_system_id');
-    // }
+    /**
+    *   Relationships
+    */
+    public function plans()
+    {
+        return $this->hasMany(Plan::class, 'operating_system_id');
+    }
 }

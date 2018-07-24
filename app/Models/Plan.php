@@ -31,4 +31,17 @@ class Plan extends Model
      * @var array
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
+     * Relationships
+     */
+    public function operating_system()
+    {
+        return $this->belongsTo(OperatingSystem::class, 'operating_system_id');
+    }
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class);
+    }
 }

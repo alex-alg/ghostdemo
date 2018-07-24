@@ -9,6 +9,7 @@ use App\Http\Requests\Plan\UpdatePlan as UpdatePlanRequest;
 
 use App\Repositories\Plan as PlanRepo;
 use App\Repositories\Feature as FeatureRepo;
+use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
 class PlanController extends Controller
 {
@@ -30,9 +31,10 @@ class PlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, FeatureRepo $featureRepo)
+    public function create(Request $request, OperatingSystemRepo $osRepo, FeatureRepo $featureRepo)
     {
         $data = [];
+        $data['operating_systems'] = $osRepo->getAll();
         $data['features'] = $featureRepo->getAll();
 
         return view('pages.admin.plan.create', $data);
@@ -44,9 +46,14 @@ class PlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePlanRequest $request, PlanRepo $planRepo)
     {
-        //
+        $data = $request->input('plan');
+
+        $planRepo->store($data);
+
+        return redirect()->route('admin.plan.index')
+                        ->with('status', 'Plan added succesfully');
     }
 
     /**
@@ -66,9 +73,16 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id, PlanRepo $planRepo, OperatingSystemRepo $osRepo, FeatureRepo $featureRepo)
     {
-        //
+        $data = [];
+        $data['plan'] = $planRepo->getById($id);
+        $data['operating_systems'] = $osRepo->getAll();
+        $data['features'] = $featureRepo->getAll();
+
+        
+
+        return view('pages.admin.plan.edit', $data);
     }
 
     /**

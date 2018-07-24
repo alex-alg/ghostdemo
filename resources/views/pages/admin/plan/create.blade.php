@@ -23,14 +23,45 @@
                             <label for="name" class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" id="name" name="plan[name]" placeholder="name">
-                                 @if ($errors->has('plan.name'))
+                                @if ($errors->has('plan.name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('plan.name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        
+
+                        <div class="form-group {{ $errors->has('plan.operating_system_id') ? ' has-error' : '' }}">
+                            <label for="operating_system" class="col-lg-2 control-label">Os</label>
+                            <div class="col-md-10">
+                                <select class="form-control" id="operating_system" name=plan[operating_system_id]>
+                                    <option></option>
+                                    @foreach($operating_systems as $os)
+                                    <option value="{{ $os->id }}">{{ $os->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('plan.operating_system_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('plan.operating_system_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                          </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">Features</label>
+                            <div class="col-lg-10">
+                                @foreach($features as $feature)
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="plan[feature_ids][]" value="{{ $feature->id }}">
+                                  <label class="form-check-label">
+                                    {{ $feature->name }}
+                                  </label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-primary">Submit</button>
