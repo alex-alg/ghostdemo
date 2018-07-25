@@ -35,7 +35,7 @@ Route::get(
     ]
 );
 
- Route::group(['prefix' => 'admin'], function () {
+ Route::group(['prefix' => 'admin', 'middleware' => ['is_admin_user']], function () {
  	Route::get(
 	    '/',
 	    [
@@ -48,7 +48,7 @@ Route::get(
 	    '/os',
 	    [
 	        'as' => 'admin.os.index',
-	        'uses' => 'OperatigSystemController@index',
+	        'uses' => 'OperatigSystemController@index'
 	    ]
 	);
     Route::get(
@@ -66,21 +66,21 @@ Route::get(
         ]
     );
     Route::get(
-        '/os/edit/{id}',
+        '/os/edit/{os}',
         [
             'as'    => 'admin.os.edit',
             'uses'  => 'OperatigSystemController@edit',
         ]
     );
     Route::post(
-        '/os/update/{id}',
+        '/os/update/{os}',
         [
             'as'    => 'admin.os.update',
             'uses'  => 'OperatigSystemController@update',
         ]
     );
     Route::get(
-        '/os/destroy/{id}',
+        '/os/destroy/{os}',
         [
             'as'    => 'admin.os.destroy',
             'uses'  => 'OperatigSystemController@destroy',
@@ -110,21 +110,21 @@ Route::get(
         ]
     );
     Route::get(
-        '/feature/edit/{id}',
+        '/feature/edit/{feature}',
         [
             'as'    => 'admin.feature.edit',
             'uses'  => 'FeatureController@edit',
         ]
     );
     Route::post(
-        '/feature/update/{id}',
+        '/feature/update/{feature}',
         [
             'as'    => 'admin.feature.update',
             'uses'  => 'FeatureController@update',
         ]
     );
     Route::get(
-        '/feature/destroy/{id}',
+        '/feature/destroy/{feature}',
         [
             'as'    => 'admin.feature.destroy',
             'uses'  => 'FeatureController@destroy',
@@ -154,21 +154,21 @@ Route::get(
         ]
     );
     Route::get(
-        '/voucher/edit/{id}',
+        '/voucher/edit/{voucher}',
         [
             'as'    => 'admin.voucher.edit',
             'uses'  => 'VoucherController@edit',
         ]
     );
     Route::post(
-        '/voucher/update/{id}',
+        '/voucher/update/{voucher}',
         [
             'as'    => 'admin.voucher.update',
             'uses'  => 'VoucherController@update',
         ]
     );
     Route::get(
-        '/voucher/destroy/{id}',
+        '/voucher/destroy/{voucher}',
         [
             'as'    => 'admin.voucher.destroy',
             'uses'  => 'VoucherController@destroy',
@@ -198,21 +198,21 @@ Route::get(
         ]
     );
     Route::get(
-        '/plan/edit/{id}',
+        '/plan/edit/{plan}',
         [
             'as'    => 'admin.plan.edit',
             'uses'  => 'PlanController@edit',
         ]
     );
     Route::post(
-        '/plan/update/{id}',
+        '/plan/update/{plan}',
         [
             'as'    => 'admin.plan.update',
             'uses'  => 'PlanController@update',
         ]
     );
     Route::get(
-        '/plan/destroy/{id}',
+        '/plan/destroy/{plan}',
         [
             'as'    => 'admin.plan.destroy',
             'uses'  => 'PlanController@destroy',

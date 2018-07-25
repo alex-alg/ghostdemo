@@ -11,6 +11,8 @@ use App\Repositories\Plan as PlanRepo;
 use App\Repositories\Feature as FeatureRepo;
 use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
+use App\Models\Plan as PlanModel;
+
 use App\Helpers\Detection;
 
 class PlanController extends Controller
@@ -77,10 +79,10 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id, PlanRepo $planRepo, OperatingSystemRepo $osRepo, FeatureRepo $featureRepo)
+    public function edit(PlanModel $plan, PlanRepo $planRepo, OperatingSystemRepo $osRepo, FeatureRepo $featureRepo)
     {
         $data = [];
-        $data['plan'] = $planRepo->getById($id);
+        $data['plan'] = $plan;
         $data['operating_systems'] = $osRepo->getAll();
         $data['features'] = $featureRepo->getAll();
 
@@ -94,10 +96,11 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePlanRequest $request, int $id, PlanRepo $planRepo)
+    public function update(UpdatePlanRequest $request, PlanModel $plan, PlanRepo $planRepo)
     {
         $data = $request->input('plan');
-        $planRepo->update($data, $id);
+        $featureIds = $request->input('feature_ids');
+        $planRepo->update($data, $plan->id, $featureIds);
 
         return redirect()->route('admin.plan.index')
                         ->with('status', 'Plan updated succesfully');
@@ -109,9 +112,9 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id, PlanRepo $planRepo)
+    public function destroy(PlanModel $plan, PlanRepo $planRepo)
     {
-         $planRepo->destroy($id);
+         $planRepo->destroy($plan->id);
 
         return redirect()->route('admin.plan.index')
                         ->with('status', 'Plan deleted succesfully');

@@ -9,6 +9,8 @@ use App\Http\Requests\Voucher\UpdateVoucher as UpdateVoucherRequest;
 
 use App\Repositories\Voucher as VoucherRepo;
 
+use App\Models\Voucher as VoucherModel;
+
 class VoucherController extends Controller
 {
     /**
@@ -70,10 +72,10 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id, VoucherRepo $voucherRepo)
+    public function edit(VoucherModel $voucher, VoucherRepo $voucherRepo)
     {
         $data = [];
-        $data['voucher'] = $voucherRepo->getById($id);
+        $data['voucher'] = $voucher;
 
         return view('pages.admin.voucher.edit', $data);
     }
@@ -85,11 +87,11 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVoucherRequest $request, int $id, VoucherRepo $voucherRepo)
+    public function update(UpdateVoucherRequest $request, VoucherModel $voucher, VoucherRepo $voucherRepo)
     {
         $data = $request->input('voucher');
 
-        $voucherRepo->update($data, $id);
+        $voucherRepo->update($data, $voucher->id);
 
         return redirect()->route('admin.voucher.index')
                         ->with('status', 'Voucher updated succesfully');
@@ -101,9 +103,9 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id, VoucherRepo $voucherRepo)
+    public function destroy(VoucherModel $voucher, VoucherRepo $voucherRepo)
     {
-        $voucherRepo->destroy($id);
+        $voucherRepo->destroy($voucher->id);
 
         return redirect()->route('admin.voucher.index')
                         ->with('status', 'Voucher deleted succesfully');

@@ -39,7 +39,7 @@ class Plan
 		return $plan;
 	}
 
-	public function update(array $data, int $id): PlanModel
+	public function update(array $data, int $id, array $featureIds): PlanModel
 	{
 		\DB::beginTransaction();
 		try {
@@ -48,8 +48,8 @@ class Plan
 			$plan->save();
 
 
-			if(!empty($data['feature_ids'])){
-				$plan->features()->sync($data['feature_ids']);
+			if(!empty($featureIds)){
+				$plan->features()->sync($featureIds);
 			}
 
 			\DB::commit();

@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('voucher.discount_percentage') ? ' has-error' : '' }}">
-                            <label for="name" class="col-lg-2 control-label">Price</label>
+                            <label for="name" class="col-lg-2 control-label">Discount percentage</label>
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" id="discount_percentage" name="voucher[discount_percentage]" value="{!! $voucher->discount_percentage !!}">
                                  @if ($errors->has('voucher.discount_percentage'))

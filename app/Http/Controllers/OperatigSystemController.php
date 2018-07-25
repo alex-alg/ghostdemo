@@ -69,10 +69,10 @@ class OperatigSystemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id, OperatingSystemRepo $osRepo)
+    public function edit(OperatingSystemModel $os, OperatingSystemRepo $osRepo)
     {
         $data = [];
-        $data['os'] = $osRepo->getById($id);
+        $data['os'] = $os;
 
         return view('pages.admin.os.edit', $data);
     }
@@ -84,10 +84,10 @@ class OperatigSystemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOperatingSystemRequest $request, int $id, OperatingSystemRepo $osRepo)
+    public function update(UpdateOperatingSystemRequest $request, OperatingSystemModel $os, OperatingSystemRepo $osRepo)
     {
         $data = $request->input('os');
-        $osRepo->update($data, $id);
+        $osRepo->update($data, $os->id);
 
         return redirect()->route('admin.os.index')
                         ->with('status', 'Operating System updated succesfully');
@@ -99,9 +99,9 @@ class OperatigSystemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id, OperatingSystemRepo $osRepo)
+    public function destroy(OperatingSystemModel $os, OperatingSystemRepo $osRepo)
     {
-        $osRepo->destroy($id);
+        $osRepo->destroy($os->id);
 
         return redirect()->route('admin.os.index')
                         ->with('status', 'Operating System deleted succesfully');

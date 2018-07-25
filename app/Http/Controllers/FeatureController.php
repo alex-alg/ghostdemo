@@ -9,6 +9,8 @@ use App\Http\Requests\Feature\UpdateFeature as UpdateFeatureRequest;
 
 use App\Repositories\Feature as FeatureRepo;
 
+use App\Models\Feature as FeatureModel;
+
 class FeatureController extends Controller
 {
     /**
@@ -67,10 +69,10 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id, FeatureRepo $featureRepo)
+    public function edit(FeatureModel $feature, FeatureRepo $featureRepo)
     {
         $data = [];
-        $data['feature'] = $featureRepo->getById($id);
+        $data['feature'] = $feature;
 
         return view('pages.admin.feature.edit', $data);
     }
@@ -82,10 +84,10 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFeatureRequest $request, int $id, FeatureRepo $featureRepo)
+    public function update(UpdateFeatureRequest $request, FeatureModel $feature, FeatureRepo $featureRepo)
     {
         $data = $request->input('feature');
-        $featureRepo->update($data, $id);
+        $featureRepo->update($data, $feature->id);
 
         return redirect()->route('admin.feature.index')
                         ->with('status', 'Feature updated succesfully');
@@ -97,9 +99,9 @@ class FeatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id, FeatureRepo $featureRepo)
+    public function destroy(FeatureModel $feature, FeatureRepo $featureRepo)
     {
-        $featureRepo->destroy($id);
+        $featureRepo->destroy($feature->id);
 
         return redirect()->route('admin.feature.index')
                         ->with('status', 'Feature deleted succesfully');
