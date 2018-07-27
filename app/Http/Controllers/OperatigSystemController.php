@@ -49,7 +49,7 @@ class OperatigSystemController extends Controller
         $osRepo->store($data);
 
         return redirect()->route('admin.os.index')
-                        ->with('status', 'Operating System added succesfully');
+                        ->with('status-success', 'Operating System added succesfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class OperatigSystemController extends Controller
         $osRepo->update($data, $os->id);
 
         return redirect()->route('admin.os.index')
-                        ->with('status', 'Operating System updated succesfully');
+                        ->with('status-success', 'Operating System updated succesfully');
     }
 
     /**
@@ -104,6 +104,6 @@ class OperatigSystemController extends Controller
         $osRepo->destroy($os->id);
 
         return redirect()->route('admin.os.index')
-                        ->with('status', 'Operating System deleted succesfully');
+                        ->with('status-success', 'Operating System deleted succesfully');
     }
 }

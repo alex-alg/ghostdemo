@@ -59,7 +59,7 @@ class PlanController extends Controller
         $planRepo->store($data, $featureIds);
 
         return redirect()->route('admin.plan.index')
-                        ->with('status', 'Plan added succesfully');
+                        ->with('status-success', 'Plan added succesfully');
     }
 
     /**
@@ -103,7 +103,7 @@ class PlanController extends Controller
         $planRepo->update($data, $plan->id, $featureIds);
 
         return redirect()->route('admin.plan.index')
-                        ->with('status', 'Plan updated succesfully');
+                        ->with('status-success', 'Plan updated succesfully');
     }
 
     /**
@@ -117,7 +117,7 @@ class PlanController extends Controller
          $planRepo->destroy($plan->id);
 
         return redirect()->route('admin.plan.index')
-                        ->with('status', 'Plan deleted succesfully');
+                        ->with('status-success', 'Plan deleted succesfully');
     }
 
     public function planList(Request $request, PlanRepo $planRepo, Detection $detectionHelper, OperatingSystemRepo $osRepo)

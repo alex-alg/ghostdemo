@@ -53,7 +53,7 @@ class VoucherController extends Controller
         $voucherRepo->store($data);
 
         return redirect()->route('admin.voucher.index')
-                        ->with('status', 'Voucher added succesfully');
+                        ->with('status-success', 'Voucher added succesfully');
     }
 
     /**
@@ -95,7 +95,7 @@ class VoucherController extends Controller
         $voucherRepo->update($data, $voucher->id);
 
         return redirect()->route('admin.voucher.index')
-                        ->with('status', 'Voucher updated succesfully');
+                        ->with('status-success', 'Voucher updated succesfully');
     }
 
     /**
@@ -109,7 +109,7 @@ class VoucherController extends Controller
         $voucherRepo->destroy($voucher->id);
 
         return redirect()->route('admin.voucher.index')
-                        ->with('status', 'Voucher deleted succesfully');
+                        ->with('status-success', 'Voucher deleted succesfully');
     }
 
     /**

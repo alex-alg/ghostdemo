@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container">
+    @if (session('status-success'))
+        <div class="alert alert-success">
+            {{ session('status-success') }}
+        </div>
+    @endif
+
+     @if (session('status-error'))
+        <div class="alert alert-danger">
+            {{ session('status-error') }}
+        </div>
+    @endif
+
 	@include('partials.admin.menu')
     <div class="row justify-content-center">
         <div class="col-md-12">

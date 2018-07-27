@@ -34,7 +34,7 @@ class HomeController extends Controller
         $sourceCookie = cookie('source', $source);
         $voucherCookie = cookie('voucher_code', $voucherCode);
 
-        return redirect('home')->with('status', 'Cookies set')
+        return redirect('home')->with('status-success', 'Cookies set')
                                 ->cookie($sourceCookie)
                                 ->cookie($campaignCookie)
                                 ->cookie($voucherCookie);

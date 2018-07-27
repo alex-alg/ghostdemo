@@ -2,9 +2,15 @@
 
 @section('content')
 <div class="container">
-    @if (session('status'))
+    @if (session('status-success'))
         <div class="alert alert-success">
-            {{ session('status') }}
+            {{ session('status-success') }}
+        </div>
+    @endif
+
+     @if (session('status-error'))
+        <div class="alert alert-danger">
+            {{ session('status-error') }}
         </div>
     @endif
 

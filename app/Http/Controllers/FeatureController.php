@@ -49,7 +49,7 @@ class FeatureController extends Controller
         $featureRepo->store($data);
 
         return redirect()->route('admin.feature.index')
-                        ->with('status', 'Feature added succesfully');
+                        ->with('status-success', 'Feature added succesfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class FeatureController extends Controller
         $featureRepo->update($data, $feature->id);
 
         return redirect()->route('admin.feature.index')
-                        ->with('status', 'Feature updated succesfully');
+                        ->with('status-success', 'Feature updated succesfully');
     }
 
     /**
@@ -104,6 +104,6 @@ class FeatureController extends Controller
         $featureRepo->destroy($feature->id);
 
         return redirect()->route('admin.feature.index')
-                        ->with('status', 'Feature deleted succesfully');
+                        ->with('status-success', 'Feature deleted succesfully');
     }
 }

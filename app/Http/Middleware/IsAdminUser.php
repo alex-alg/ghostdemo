@@ -21,10 +21,7 @@ class IsAdminUser
         $userHelper = app(UserHelper::class);
 
         if(is_null($user) || !$userHelper->isAdmin($user)){
-            $request->session()->flash("status.message", "Access denied");
-            $request->session()->flash("status.type", "error");
-
-            return redirect()->route('home');
+            return redirect()->route('home')->with('status-error', 'Access denied');
         };
 
         return $next($request);
