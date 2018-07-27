@@ -124,13 +124,15 @@ class PlanController extends Controller
     {
         $data = [];
         $plans = $planRepo->getAll();
-        
+
         $osFullName = $detectionHelper->getOS($_SERVER['HTTP_USER_AGENT']);
         $osName = explode(' ', $osFullName)[0];
         $os = $osRepo->getByName($osName);
 
         $plans = $planRepo->filterByOs($plans, $os->id);
+        
         $data['plans'] = $planRepo->parseForList($plans);
+        $data['applyVoucherUrl'] = route('voucher.apply');
 
         return view('pages.pricing_plans', $data);
     }

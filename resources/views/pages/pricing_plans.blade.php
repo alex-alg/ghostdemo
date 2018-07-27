@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header"><h5>@lang('pricing_plans.title')</h5></div>
 
-                <div class="card-body">
+                <div id="pricing-plans" class="card-body">
 
                     <div class="row">
                         @foreach($plans as $plan)
@@ -28,10 +28,31 @@
                             </div>
                         </div>
                         @endforeach
+                        <div class="col-md-3">
+                            <apply-voucher-form :links="formLinks" :labels="formLabels"></apply-voucher-form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        var pricingPlansData = {
+            formLinks: {
+                applyVoucherUrl: "{!! $applyVoucherUrl !!}"
+            },
+            formLabels: {
+                headerLabel: '{!! trans('voucher.apply_voucher_header') !!}',
+                codeLabel: '{!! trans('voucher.code') !!}',
+                applyButtonLabel: '{!! trans('voucher.apply_button') !!}',
+                applySuccessMessage: '{!! trans('voucher.apply_success_message') !!}',
+                applyErrorMessage: '{!! trans('voucher.apply_error_message') !!}'
+            },
+        }
+    </script>
+    <script src="{{URL::asset('js/compiled/pricing-plans.js')}}" crossorigin="anonymous"></script>
 @endsection

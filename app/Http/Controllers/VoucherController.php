@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Voucher\StoreVoucher as StoreVoucherRequest;
 use App\Http\Requests\Voucher\UpdateVoucher as UpdateVoucherRequest;
+use App\Http\Requests\Voucher\ApplyVoucher as ApplyVoucherRequest;
 
 use App\Repositories\Voucher as VoucherRepo;
 
@@ -109,5 +110,16 @@ class VoucherController extends Controller
 
         return redirect()->route('admin.voucher.index')
                         ->with('status', 'Voucher deleted succesfully');
+    }
+
+    /**
+     * Check if vocher is available
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function applyVoucher(ApplyVoucherRequest $request)
+    {
+        $code = $request->input('code');
     }
 }

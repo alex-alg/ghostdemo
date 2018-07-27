@@ -35,6 +35,14 @@ Route::get(
     ]
 );
 
+Route::post(
+    '/voucher/apply',
+    [
+        'as'    => 'voucher.apply',
+        'uses'  => 'VoucherController@applyVoucher',
+    ]
+);
+
  Route::group(['prefix' => 'admin', 'middleware' => ['is_admin_user']], function () {
  	Route::get(
 	    '/',
