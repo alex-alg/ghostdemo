@@ -23697,66 +23697,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['links', 'labels'],
+				props: ['links', 'labels'],
 
-	data: function data() {
-		return {
-			is_loading: false,
-			showSuccessMessage: false,
-			showErrorMessage: false,
+				data: function data() {
+								return {
+												is_loading: false,
+												showSuccessMessage: false,
+												showErrorMessage: false,
 
-			form: new __WEBPACK_IMPORTED_MODULE_1__helpers_form_form_js__["a" /* default */]({
-				code: null
-			})
-		};
-	},
+												form: new __WEBPACK_IMPORTED_MODULE_1__helpers_form_form_js__["a" /* default */]({
+																code: null
+												})
+								};
+				},
 
-	mounted: function mounted() {
-		//this.initFormData();
-	},
+				mounted: function mounted() {
+								//
+				},
 
-	methods: {
-		displaySuccessMessage: function displaySuccessMessage() {
-			this.hideErrorMessage();
-			this.showSuccessMessage = true;
-		},
+				methods: {
+								displaySuccessMessage: function displaySuccessMessage() {
+												this.hideErrorMessage();
+												this.showSuccessMessage = true;
+								},
 
-		hideSuccessMessage: function hideSuccessMessage() {
-			if (this.showSuccessMessage === true) {
-				this.showSuccessMessage = false;
-			}
-		},
+								hideSuccessMessage: function hideSuccessMessage() {
+												if (this.showSuccessMessage === true) {
+																this.showSuccessMessage = false;
+												}
+								},
 
-		displayErrorMessage: function displayErrorMessage() {
-			this.hideSuccessMessage();
-			this.showErrorMessage = true;
-		},
+								displayErrorMessage: function displayErrorMessage() {
+												this.hideSuccessMessage();
+												this.showErrorMessage = true;
+								},
 
-		hideErrorMessage: function hideErrorMessage() {
-			if (this.showErrorMessage === true) {
-				this.showErrorMessage = false;
-			}
-		},
+								hideErrorMessage: function hideErrorMessage() {
+												if (this.showErrorMessage === true) {
+																this.showErrorMessage = false;
+												}
+								},
 
-		onSubmit: function onSubmit() {
-			var self = this;
-			self.hideSuccessMessage();
-			self.hideErrorMessage();
-			self.is_loading = true;
+								onSubmit: function onSubmit() {
+												var self = this;
+												self.hideSuccessMessage();
+												self.hideErrorMessage();
+												self.is_loading = true;
 
-			self.form.post(self.links.applyVoucherUrl).then(function (response) {
-				self.displaySuccessMessage();
-			}).catch(function (errors) {
-				self.displayErrorMessage();
-			}).then(function () {
-				self.is_loading = false;
-			});
-		}
-	},
+												self.form.post(self.links.applyVoucherUrl).then(function (response) {
+																self.displaySuccessMessage();
+												}).catch(function (errors) {
+																self.displayErrorMessage();
+												}).then(function () {
+																self.is_loading = false;
+												});
+								}
+				},
 
-	components: {
-		'v-simple-spinner': __webpack_require__(54)
-	}
+				components: {
+								'v-simple-spinner': __webpack_require__(54)
+				}
 });
 
 /***/ }),

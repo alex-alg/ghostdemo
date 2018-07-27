@@ -35,6 +35,14 @@ Route::get(
     ]
 );
 
+Route::get(
+    '/set-cookie-values/source/{source}/campaign/{campaign}/voucher_code/{voucher_code?}',
+    [
+        'as'    => 'home.set-cookie-values',
+        'uses'  => 'HomeController@setCookieValues',
+    ]
+);
+
 Route::post(
     '/voucher/apply',
     [

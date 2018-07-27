@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><h5>@lang('pricing_plans.title')</h5></div>
+                <div class="card-header"><h4>@lang('pricing_plans.title')</h4></div>
 
                 <div id="pricing-plans" class="card-body">
 
