@@ -13,8 +13,6 @@ use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
 use App\Models\Plan as PlanModel;
 
-use App\Helpers\Detection;
-
 class PlanController extends Controller
 {
     /**
@@ -120,20 +118,22 @@ class PlanController extends Controller
                         ->with('status-success', 'Plan deleted succesfully');
     }
 
-    public function planList(Request $request, PlanRepo $planRepo, Detection $detectionHelper, OperatingSystemRepo $osRepo)
+    public function planList(Request $request)
     {
         $data = [];
-        $plans = $planRepo->getAll();
-
-        $osFullName = $detectionHelper->getOS($_SERVER['HTTP_USER_AGENT']);
-        $osName = explode(' ', $osFullName)[0];
-        $os = $osRepo->getByName($osName);
-
-        $plans = $planRepo->filterByOs($plans, $os->id);
-        
-        $data['plans'] = $planRepo->parseForList($plans);
         $data['applyVoucherUrl'] = route('voucher.apply');
+        $data['getPlanListUrl'] = route('get-plan-list');
 
         return view('pages.pricing_plans', $data);
+    }
+
+    public function getPlanList(Request $request, PlanRepo $planRepo)
+    {
+        $data = [];
+        $plans = $planRepo->getByOs();
+
+        $data['plans'] = $planRepo->parseForList($plans)->toArray($request);
+
+        return $data;
     }
 }

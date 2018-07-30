@@ -9,30 +9,25 @@
                 <div class="card-header"><h4>@lang('pricing_plans.title')</h4></div>
 
                 <div id="pricing-plans" class="card-body">
-
                     <div class="row">
-                        @foreach($plans as $plan)
-                        <div class="col-md-3">
-                            <div class="card bg-info">
-                                <div class="card-header">{{ $plan->name }}</div>
-                                <div class="card-body">
-                                    <h4>OS: {{ $plan->os }}</h4>
-                                    <p>Features:</p>
-                                    @foreach($plan->features as $feature)
-                                        <p>{{ $feature->name }}</p>
-                                    @endforeach
-                                </div>
-                                <div class="card-footer">
-                                    <a href="" class="btn btn-success">Choose</a>
-                                </div>
-                            </div>
+                        <div class="col-md-9">
+                            <plans-list :links="plansListLinks" ref="planList"></plans-list>
                         </div>
-                        @endforeach
                         <div class="col-md-3">
-                            <apply-voucher-form :links="formLinks" :labels="formLabels"></apply-voucher-form>
+                            <apply-voucher-form
+                                :links="formLinks"
+                                :labels="formLabels"
+                                v-on:voucher-applied="refreshPlanList"
+                                ></apply-voucher-form>
+
+                            <p>Available codes:</p>
+                            <p>abc - 5%</p>
+                            <p>xyz - 10%</p>
+                            <p>123 - 15%</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -41,7 +36,10 @@
 
 @section('script')
     <script>
-        var pricingPlansData = {
+        var pricingPlansPageData = {
+            plansListLinks: {
+                getPlansDataUrl: "{!! $getPlanListUrl !!}"
+            },
             formLinks: {
                 applyVoucherUrl: "{!! $applyVoucherUrl !!}"
             },

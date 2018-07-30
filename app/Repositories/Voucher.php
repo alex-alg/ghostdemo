@@ -8,16 +8,6 @@ use Illuminate\Support\Collection;
 
 class Voucher
 {
-	public function getAll(): Collection
-	{
-		return VoucherModel::all();
-	}
-
-	public function getById(int $id): VoucherModel
-	{
-		return VoucherModel::findOrFail($id);
-	}
-
 	public function store(array $data): VoucherModel
 	{
 		\DB::beginTransaction();
@@ -53,6 +43,21 @@ class Voucher
 	public function destroy(int $id)
 	{
 		return VoucherModel::findOrFail($id)->delete();
+	}
+
+	public function getAll(): Collection
+	{
+		return VoucherModel::all();
+	}
+
+	public function getById(int $id): VoucherModel
+	{
+		return VoucherModel::findOrFail($id);
+	}
+
+	public function getByCode(string $code)
+	{
+		return VoucherModel::where('code', '=', $code)->get()->first();
 	}
 
 	public function parseForList(Collection $vouchers): Collection

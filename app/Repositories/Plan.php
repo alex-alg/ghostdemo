@@ -4,20 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Plan as PlanModel;
 
+use App\Helpers\Detection;
+
+use App\Repositories\OperatingSystem as OperatingSystemRepo;
+
+use App\Http\Resources\Plan as PlanResource;
+
 use Illuminate\Support\Collection;
 
 class Plan
 {
-	public function getAll(): Collection
-	{
-		return PlanModel::all();
-	}
-
-	public function getById(int $id): PlanModel
-	{
-		return PlanModel::findOrFail($id);
-	}
-
 	public function store(array $data, array $featureIds): PlanModel
 	{
 		\DB::beginTransaction();
@@ -66,17 +62,27 @@ class Plan
 		return PlanModel::findOrFail($id)->delete();
 	}
 
-	public function parseForList(Collection $plans): Collection
+	public function getAll(): Collection
 	{
-		return $plans->map(function ($item, $key) {
-			$plan = app(\stdClass::class);
-			$plan->id = $item->id;
-			$plan->name = $item->name;
-			$plan->os = $item->operating_system->name;
-			$plan->features = $item->features;
+		return PlanModel::all();
+	}
 
-			return $plan;
-		});
+	public function getById(int $id): PlanModel
+	{
+		return PlanModel::findOrFail($id);
+	}
+
+	public function getByOs(): Collection
+	{
+		$plans = $this->getAll();
+
+        $osFullName = app(Detection::class)->getOS($_SERVER['HTTP_USER_AGENT']);
+        $osName = explode(' ', $osFullName)[0];
+        $os = app(OperatingSystemRepo::class)->getByName($osName);
+
+        $plans = $this->filterByOs($plans, $os->id);
+
+        return $plans;
 	}
 
 	public function filterByOs(Collection $plans, int $osId): Collection
@@ -84,5 +90,10 @@ class Plan
 		return $plans->filter(function($item, $key) use ($osId){
 			return $item->operating_system_id === $osId;
 		});
+	}
+
+	public function parseForList(Collection $plans)
+	{
+		return PlanResource::collection($plans);
 	}
 }

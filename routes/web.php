@@ -35,6 +35,14 @@ Route::get(
     ]
 );
 
+Route::post(
+    '/get-plan-list',
+    [
+        'as' => 'get-plan-list',
+        'uses' => 'PlanController@getPlanList',
+    ]
+);
+
 Route::get(
     '/set-cookie-values/source/{source}/campaign/{campaign}/voucher_code/{voucher_code?}',
     [

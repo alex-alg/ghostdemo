@@ -86,6 +86,7 @@
 	    	self.form.post(self.links.applyVoucherUrl)
           .then((response) => {
           	self.displaySuccessMessage();
+            self.$emit('voucher-applied', response.discount_percentage);
           })
           .catch((errors) => {
           	self.displayErrorMessage();

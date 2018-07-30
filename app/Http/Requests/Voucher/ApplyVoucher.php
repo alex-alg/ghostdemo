@@ -4,6 +4,8 @@ namespace App\Http\Requests\Voucher;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Rules\Voucher\VoucherCodeExists;
+
 class ApplyVoucher extends FormRequest
 {
     /**
@@ -24,7 +26,7 @@ class ApplyVoucher extends FormRequest
     public function rules()
     {
         return [
-            'code'      => 'required'
+            'code'      => ['required', 'string', new VoucherCodeExists]
         ];
     }
 }

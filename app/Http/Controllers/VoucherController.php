@@ -9,6 +9,7 @@ use App\Http\Requests\Voucher\UpdateVoucher as UpdateVoucherRequest;
 use App\Http\Requests\Voucher\ApplyVoucher as ApplyVoucherRequest;
 
 use App\Repositories\Voucher as VoucherRepo;
+use App\Repositories\OperatingSystem as OperatingSystemRepo;
 
 use App\Models\Voucher as VoucherModel;
 
@@ -118,8 +119,12 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function applyVoucher(ApplyVoucherRequest $request)
+    public function applyVoucher(ApplyVoucherRequest $request, VoucherRepo $voucherRepo)
     {
         $code = $request->input('code');
+        $voucher = $voucherRepo->getByCode($code);
+        $data['discount_percentage'] = $voucher->discount_percentage;
+
+        return $data;
     }
 }
