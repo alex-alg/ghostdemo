@@ -16,15 +16,6 @@ class Plan extends JsonResource
         foreach ($this->features as $feature) {
             $price += $feature->price;
         }
-        
-
-        // $voucherCode = Cookie::get('voucher_code');
-        // dd($voucherCode);
-
-        // if($voucherCode){
-        //     $voucher = app(VoucherRepo::class)->getByCode($voucherCode);
-        //     dd($voucher->discount_percentage);
-        // }
 
         return $price;
     }

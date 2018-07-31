@@ -24,7 +24,7 @@ class PlanController extends Controller
     {
         $data = [];
         $plans = $planRepo->getAll();
-        $data['plans'] = $planRepo->parseForList($plans);
+        $data['plans'] = $planRepo->parseForList($plans)->toArray($request);
 
         return view('pages.admin.plan.index', $data);
     }

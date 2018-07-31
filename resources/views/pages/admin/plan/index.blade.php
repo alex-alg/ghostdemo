@@ -42,17 +42,17 @@
                         </tr>
                         @foreach($plans as $plan)
                         <tr>
-                            <td>{{ $plan->id }}</td>
-                            <td>{{ $plan->name }}</td>
-                            <td>{{ $plan->os }}</td>
+                            <td>{{ $plan['id'] }}</td>
+                            <td>{{ $plan['name'] }}</td>
+                            <td>{{ $plan['os'] }}</td>
                             <td>
-                                @foreach($plan->features as $feature)
+                                @foreach($plan['features'] as $feature)
                                     <p>{{ $feature->name }}</p>
                                 @endforeach
                             </td>
                             <td>
-                                <a href="{{ route('admin.plan.edit', $plan->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ route('admin.plan.destroy', $plan->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ route('admin.plan.edit', $plan['id']) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('admin.plan.destroy', $plan['id']) }}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach
